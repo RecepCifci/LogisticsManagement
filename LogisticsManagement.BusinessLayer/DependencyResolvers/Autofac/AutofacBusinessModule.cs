@@ -36,6 +36,8 @@ namespace LogisticsManagement.BusinessLayer.DependencyResolvers.Autofac
 
             builder.RegisterType<VehicleTypeManager>().As<IVehicleTypeService>();
             builder.RegisterType<PostgreSqlVehicleTypeDal>().As<IVehicleTypeDal>();
+
+            builder.RegisterType<ReportManager>().As<IReportService>();
         }
     }
 }

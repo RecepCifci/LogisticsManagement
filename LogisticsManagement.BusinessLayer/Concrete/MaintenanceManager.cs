@@ -45,5 +45,10 @@ namespace LogisticsManagement.BusinessLayer.Concrete
             _maintenanceDal.Update(maintenance);
             return new SuccessResult(Messages.Updated);
         }
+
+        public void GetMaintenanceReport()
+        {
+            _maintenanceDal.GetReportData();
+        }
     }
 }
