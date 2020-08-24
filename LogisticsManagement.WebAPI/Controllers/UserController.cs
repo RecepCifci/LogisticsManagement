@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LogisticsManagement.BusinessLayer.Abstract;
+using LogisticsManagement.BusinessLayer.Constants;
+using LogisticsManagement.Core.Results;
 using LogisticsManagement.Entities.Concrete;
+using LogisticsManagement.Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogisticsManagement.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -76,6 +81,18 @@ namespace LogisticsManagement.WebAPI.Controllers
             }
 
             return BadRequest(result.Message);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IResult Authenticate(LoginDto loginDto)
+        {
+            var result = _userService.Authenticate(loginDto);
+
+            if (result == null)
+                return new ErrorResult(String.Format(Messages.UserIdNotExist, loginDto.UserId));
+
+            return new SuccessResult();
         }
     }
 }

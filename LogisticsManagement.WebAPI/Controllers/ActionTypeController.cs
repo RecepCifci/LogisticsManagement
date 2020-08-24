@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using LogisticsManagement.BusinessLayer.Abstract;
 using LogisticsManagement.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogisticsManagement.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ActionTypeController : ControllerBase

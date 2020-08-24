@@ -3,6 +3,7 @@ using LogisticsManagement.BusinessLayer.Constants;
 using LogisticsManagement.Core.Results;
 using LogisticsManagement.DataAccessLayer.Abstract;
 using LogisticsManagement.Entities.Concrete;
+using LogisticsManagement.Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,15 @@ namespace LogisticsManagement.BusinessLayer.Concrete
         {
             _userDal.Update(user);
             return new SuccessResult(Messages.Updated);
+        }
+
+        public IResult Authenticate(LoginDto loginDto)
+        {
+            if (_userDal.Get(p => p.ID == loginDto.UserId) == null)
+            {
+                return new ErrorResult(Messages.UserIdNotExist);
+            }
+            return new SuccessResult();
         }
     }
 }

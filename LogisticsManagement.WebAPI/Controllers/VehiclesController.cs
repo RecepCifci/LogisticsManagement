@@ -6,10 +6,12 @@ using LogisticsManagement.BusinessLayer.Abstract;
 using LogisticsManagement.Core.Results;
 using LogisticsManagement.DataAccessLayer.Abstract;
 using LogisticsManagement.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogisticsManagement.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class VehiclesController : ControllerBase
