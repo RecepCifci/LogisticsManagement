@@ -28,11 +28,9 @@ namespace LogisticsManagement.WebAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddEntityFrameworkNpgsql().AddDbContext<PostgreSqlContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection")));
 
             services.AddDbContext<PostgreSqlContext>(options => options.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection")));
 
@@ -47,7 +45,6 @@ namespace LogisticsManagement.WebAPI
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

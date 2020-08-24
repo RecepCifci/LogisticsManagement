@@ -14,7 +14,6 @@ namespace LogisticsManagement.Core.Results
         {
         }
 
-        //Aşağıdaki iki tip farklı tipleri göstermek için eklenmiştir.
         public SuccessDataResult(string message) : base(default, true, message)
         {
         }

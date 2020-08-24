@@ -10,8 +10,6 @@ using System.Text;
 
 namespace LogisticsManagement.DataAccessLayer.Concrete.PostgreSql
 {
-    //public class PostgreSqlEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity> where TEntity : class, IEntity, new()
-    //where TContext : DbContext, new()
     public class PostgreSqlEntityRepositoryBase<TEntity> : IEntityRepository<TEntity> where TEntity : class, IEntity, new()
     {
         private readonly PostgreSqlContext _context;
@@ -21,43 +19,30 @@ namespace LogisticsManagement.DataAccessLayer.Concrete.PostgreSql
         }
         public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
-            //using (var context = new TContext())
-            //{
             return filter == null
                 ? _context.Set<TEntity>().ToList()
                 : _context.Set<TEntity>().Where(filter).ToList();
-            //}
         }
 
         public void Add(TEntity entity)
         {
-            
-            //using (var context = new TContext())
-            //{
             var addedEntity = _context.Entry(entity);
             addedEntity.State = EntityState.Added;
             _context.SaveChanges();
-            //}
         }
 
         public void Update(TEntity entity)
         {
-            //using (var context = new TContext())
-            //{
             var updatedEntity = _context.Entry(entity);
             updatedEntity.State = EntityState.Modified;
             _context.SaveChanges();
-            //}
         }
 
         public void Delete(TEntity entity)
         {
-            //using (var context = new TContext())
-            //{
             var deletedEntity = _context.Entry(entity);
             deletedEntity.State = EntityState.Deleted;
             _context.SaveChanges();
-            // }
         }
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
